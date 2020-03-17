@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 
 import Animated, {sub, divide, multiply, add} from 'react-native-reanimated';
 
-const INDICATOR_INITIAL_WIDTH = 10;
+export const INDICATOR_INITIAL_WIDTH = 10;
 
 export default ({
   translateX,

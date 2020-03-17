@@ -12,7 +12,7 @@ import {
   eq,
 } from 'react-native-reanimated';
 import SelectorItem from './SelectorItem';
-import SelectorIndicator from './SelectorIndicator';
+import SelectorIndicator, {INDICATOR_INITIAL_WIDTH} from './SelectorIndicator';
 
 export default ({
   data,
@@ -42,8 +42,8 @@ export default ({
     [
       snapPoints[selectedIndex],
       snapPoints[selectedIndex],
-      itemsWidth[selectedIndex] / 10,
-      itemsWidth[selectedIndex] / 10,
+      itemsWidth[selectedIndex] / INDICATOR_INITIAL_WIDTH,
+      itemsWidth[selectedIndex] / INDICATOR_INITIAL_WIDTH,
     ],
     [itemsWidth],
   );
@@ -75,7 +75,7 @@ export default ({
             duration: 200,
             easing: Easing.linear,
             from: lastScaleX,
-            to: itemsWidth[selectedIndex] / 10,
+            to: itemsWidth[selectedIndex] / INDICATOR_INITIAL_WIDTH,
           }),
         ),
       ]),
