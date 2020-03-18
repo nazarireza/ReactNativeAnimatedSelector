@@ -1,7 +1,7 @@
 import React, {useState, useMemo, useRef} from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {useValues, timing, useClocks} from 'react-native-redash';
+import {useValues, timing, useClocks, useTransition} from 'react-native-redash';
 import {
   useCode,
   block,
@@ -47,8 +47,7 @@ export default ({
     ],
     [itemsWidth],
   );
-  const [renderProgress] = useValues([0], []);
-  const [transitionClock, renderProgressClock, scaleXClock] = useClocks(3, []);
+  const [transitionClock, scaleXClock] = useClocks(2, []);
 
   useCode(
     () =>
@@ -82,19 +81,6 @@ export default ({
     [selectedIndex],
   );
 
-  useCode(
-    () =>
-      set(
-        renderProgress,
-        timing({
-          clock: renderProgressClock,
-          duration: 500,
-          to: 1,
-        }),
-      ),
-    [mustBeRender],
-  );
-
   const handleLayoutSelectorItem = (index, {width: renderWidth, height}) => {
     itemsWidthTemp.current.push({index, renderWidth});
     const renderCompleted = itemsWidthTemp.current.length === data.length;
@@ -106,6 +92,8 @@ export default ({
       );
     renderCompleted && setMustBeRender(true);
   };
+
+  const renderProgress = useTransition(mustBeRender, {duration: 500});
 
   return (
     <View
